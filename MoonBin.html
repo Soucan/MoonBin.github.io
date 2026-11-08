@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Moonbin · Luau pastes</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌙</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,wght@0,500;1,500&family=JetBrains+Mono:wght@400;500&family=Fira+Code:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--rad:18px;--blur:18px;--fs:14px;--lh:1.65;--tab:4;--maxw:900px;--font:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--text);font:15px/1.5 'DM Sans',system-ui,sans-serif;transition:background .4s,color .4s;overflow-x:hidden}
+.fx{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.fx i{position:absolute;width:55vmax;height:55vmax;border-radius:50%;filter:blur(100px);opacity:.26;animation:drift 26s ease-in-out infinite alternate}
+.fx i:nth-child(1){background:var(--accent);top:-22vmax;left:-14vmax}
+.fx i:nth-child(2){background:var(--accent2);bottom:-28vmax;right:-14vmax;animation-delay:-9s}
+@keyframes drift{to{transform:translate(7vmax,5vmax) scale(1.14)}}
+[data-fx=grid] .fx{background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:44px 44px}
+[data-fx=grid] .fx i{opacity:.1}
+[data-fx=plain] .fx i{display:none}
+@media (prefers-reduced-motion:reduce){.fx i{animation:none}*{transition:none!important}}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:var(--maxw);margin:0 auto;padding:22px 24px 14px;flex-wrap:wrap}
+.logo{display:flex;align-items:baseline;gap:10px;color:var(--text);text-decoration:none}
+.logo b{font:italic 500 28px Fraunces,serif;letter-spacing:-.01em}
+.logo small{color:var(--muted);font-size:13px}
+nav{display:flex;gap:8px}
+main{max-width:var(--maxw);margin:0 auto;padding:6px 24px 48px;transition:max-width .3s}
+.btn{border:1px solid var(--border);background:var(--panel2);color:var(--text);padding:8px 14px;border-radius:calc(var(--rad)*.62);cursor:pointer;font:inherit;font-size:13px;transition:transform .15s,border-color .2s,background .2s}
+.btn:hover{border-color:var(--accent)}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.pri{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:0;font-weight:700}
+.btn.sm{padding:4px 10px;font-size:12px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--rad);backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));box-shadow:0 40px 90px -40px rgba(0,0,0,.55);overflow:hidden}
+.bar{display:flex;align-items:center;gap:14px;padding:12px 18px;border-bottom:1px solid var(--border)}
+.dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%;background:var(--muted);opacity:.45}
+.dots i:nth-child(1){background:#ff5f57;opacity:.9}.dots i:nth-child(2){background:#febc2e;opacity:.9}.dots i:nth-child(3){background:#28c840;opacity:.9}
+.nochrome .dots{display:none}
+#title{flex:1;min-width:0;background:none;border:0;color:var(--text);font:italic 500 19px Fraunces,serif;padding:4px 0}
+#title::placeholder{color:var(--muted)}
+.badge{font-size:12px;padding:3px 10px;border-radius:99px;border:1px solid var(--border);color:var(--accent);white-space:nowrap}
+.ed{display:flex;height:min(62vh,640px);min-height:320px;font:var(--fs)/var(--lh) var(--font);font-variant-ligatures:none}
+.lig .ed{font-variant-ligatures:normal}
+.gut{width:54px;flex:none;overflow:hidden;color:var(--muted);text-align:right;border-right:1px solid var(--border);user-select:none}
+.noln .gut{display:none}
+.gut div{white-space:pre;padding:16px 12px 40px 0}
+.wrap{position:relative;flex:1;min-width:0}
+.wrap pre,.wrap textarea{position:absolute;inset:0;margin:0;padding:16px 16px 40px;border:0;font:inherit;font-variant-ligatures:inherit;white-space:pre;tab-size:var(--tab);-moz-tab-size:var(--tab)}
+.wrap pre{overflow:hidden;pointer-events:none;color:var(--text)}
+.wrap textarea{overflow:auto;resize:none;outline:0;background:none;color:transparent;-webkit-text-fill-color:transparent;caret-color:var(--accent)}
+::selection{background:color-mix(in srgb,var(--accent) 35%,transparent)}
+.k{color:var(--kw)}.s{color:var(--str)}.n{color:var(--num)}.c{color:var(--com);font-style:italic}.f{color:var(--fn)}.g{color:var(--glob)}.t{color:var(--type)}.o{color:var(--op)}.p{color:var(--text)}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 18px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.hint{color:var(--muted);font-size:13px;margin:16px 4px 0;max-width:62ch}
+body.viewing .ed-only,body:not(.viewing) .view-only{display:none}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(390px,100vw);padding:24px;overflow:auto;z-index:20;transform:translateX(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1);background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px);border-left:1px solid var(--border)}
+.drawer.open{transform:none}
+.drawer h3{margin:0 0 18px;font:italic 500 24px Fraunces,serif}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px;font-size:14px}
+.row>span:first-child{flex:none}
+.row input[type=range]{flex:1;accent-color:var(--accent)}
+.row b{width:34px;text-align:right;font-weight:500;color:var(--muted)}
+select,input[type=color]{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:6px 8px;font:inherit;font-size:13px}
+input[type=color]{padding:0;width:42px;height:30px;cursor:pointer}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}
+.sw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.sw button{height:56px;border-radius:12px;border:2px solid transparent;cursor:pointer;color:var(--text);font:inherit;font-size:12px;display:flex;align-items:flex-end;padding:6px 8px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.sw button.on{border-color:var(--text)}
+.item{padding:14px;border:1px solid var(--border);border-radius:14px;margin-bottom:10px;background:var(--panel2)}
+.item h4{margin:0 0 2px;font:italic 500 17px Fraunces,serif;word-break:break-word}
+.item p{margin:0 0 10px;color:var(--muted);font-size:12px}
+.item div{display:flex;gap:6px}
+.empty{color:var(--muted);font-size:14px}
+#scrim{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .3s}
+#scrim.on{opacity:1;pointer-events:auto}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);opacity:0;background:var(--text);color:var(--bg);padding:10px 18px;border-radius:99px;font-size:14px;transition:.3s;z-index:30;pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="fx"><i></i><i></i></div>
+<header class="top">
+  <a class="logo" href="#"><b>Moonbin</b><small>Luau pastes</small></a>
+  <nav><button class="btn" id="bNew">New paste</button><button class="btn" id="bLib">Library</button><button class="btn" id="bSet">Customize</button></nav>
+</header>
+<main>
+  <section class="card">
+    <div class="bar"><span class="dots"><i></i><i></i><i></i></span><input id="title" placeholder="Untitled script" maxlength="80" spellcheck="false" aria-label="Paste title"><span class="badge view-only">Read-only</span><span class="badge">Luau</span></div>
+    <div class="ed"><div class="gut"><div></div></div><div class="wrap"><pre id="pre" aria-hidden="true"></pre><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" wrap="off" aria-label="Luau code"></textarea></div></div>
+    <div class="foot"><span id="stats"></span>
+      <div class="acts"><button class="btn" id="bCopy">Copy code</button><button class="btn" id="bDl">Download .lua</button><button class="btn ed-only" id="bSave">Save to library</button><button class="btn view-only" id="bFork">Edit a copy</button><button class="btn pri" id="bShare">Copy share link</button></div></div>
+  </section>
+  <p class="hint">Shared pastes live inside the link itself, so nothing is uploaded and no server is needed. Ctrl+S saves to your library. Ctrl+Enter copies the share link.</p>
+</main>
+<aside class="drawer" id="set" aria-label="Customize"></aside>
+<aside class="drawer" id="lib" aria-label="Library"></aside>
+<div id="scrim"></div><div id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s);
+const LS={get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v??d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+const THEMES={
+ dusk:{n:'Dusk',bg:'#14101f',text:'#ebe6f7',muted:'#7d7499',accent:'#b18cff',accent2:'#ff8fb1',kw:'#c9a0ff',str:'#a8e6b0',num:'#ffbd7a',com:'#6a6088',fn:'#7ecbff',glob:'#ff8fb1',type:'#ffd98a',op:'#9a90c4'},
+ aurora:{n:'Aurora',bg:'#06130e',text:'#e2f5ec',muted:'#5f8b7a',accent:'#3ee6a8',accent2:'#4cc9ff',kw:'#5eead4',str:'#bef264',num:'#fdba74',com:'#4b7567',fn:'#7dd3fc',glob:'#f9a8d4',type:'#fde68a',op:'#7fb5a2'},
+ rose:{n:'Rosewood',bg:'#190c13',text:'#f8e8f0',muted:'#8f5f78',accent:'#ff6b9d',accent2:'#ffa14a',kw:'#ff7eb6',str:'#ffd6a5',num:'#c4b5fd',com:'#7a4b63',fn:'#93c5fd',glob:'#fda4af',type:'#fcd34d',op:'#c79ab0'},
+ ember:{n:'Ember',bg:'#170f0a',text:'#f7ebe0',muted:'#8c6e58',accent:'#ffa14a',accent2:'#ff5d73',kw:'#ff9e64',str:'#c3e88d',num:'#f78c6c',com:'#7a5f4b',fn:'#82aaff',glob:'#ff757f',type:'#ffc777',op:'#c4a48a'},
+ tide:{n:'Tide',bg:'#06121c',text:'#e1f1fb',muted:'#5b86a3',accent:'#4cc9ff',accent2:'#7c6cff',kw:'#7aa2ff',str:'#9ece6a',num:'#ff9e64',com:'#46657d',fn:'#2ac3de',glob:'#bb9af7',type:'#e0af68',op:'#7fa6c4'},
+ paper:{n:'Paper',light:1,bg:'#f5f2ec',text:'#2a2733',muted:'#9b96a6',accent:'#6c4cff',accent2:'#ff6b9d',kw:'#8a3ffc',str:'#1a8f4f',num:'#d9480f',com:'#9b96a6',fn:'#0b6bcb',glob:'#c2255c',type:'#b7791f',op:'#6b6580'}
+};
+const FONTS={'JetBrains Mono':"'JetBrains Mono'",'Fira Code':"'Fira Code'",'Space Mono':"'Space Mono'",'System mono':''};
+const DEF={theme:'dusk',accent:'',font:'JetBrains Mono',fs:14,lh:1.65,tab:'4',lig:true,ln:true,fx:'aurora',blur:18,rad:18,w:'cozy',chrome:true};
+let S={...DEF,...LS.get('moonbin.s',{})};
+const SAMPLE=['--!strict','-- Welcome to Moonbin. Paste, tweak, share.','local Players = game:GetService("Players")','local TweenService = game:GetService("TweenService")','','type Config = { speed: number, label: string? }','','local function greet(player: Player, cfg: Config): string','  local msg = `Hello, {player.Name}! Speed: {cfg.speed}`','  print(msg)','  return msg','end','','Players.PlayerAdded:Connect(function(player)','  for i = 1, 3 do','    task.wait(0.5)','    greet(player, { speed = i * 16 })','  end','end)'].join('\n');
+
+/* ---------- Luau highlighter ---------- */
+const W=s=>new Set(s.split(' '));
+const KW=W('and break do else elseif end false for function if in local nil not or repeat return then true until while continue export'),
+GLOB=W('game workspace script shared _G _VERSION Instance Vector3 Vector2 CFrame Color3 UDim2 UDim Enum BrickColor TweenInfo Ray Region3 Rect NumberRange NumberSequence ColorSequence Random Axes Faces math string table task coroutine os debug utf8 bit32 buffer'),
+FN=W('print warn error assert pcall xpcall select tostring tonumber typeof ipairs pairs next require setmetatable getmetatable rawget rawset rawequal rawlen unpack tick time wait spawn delay'),
+TY=W('number string boolean any nil unknown never thread table');
+const RX=/(--\[(=*)\[[\s\S]*?\]\2\]|--[^\n]*)|(\[(=*)\[[\s\S]*?\]\4\]|"(?:[^"\\\n]|\\[\s\S])*"?|'(?:[^'\\\n]|\\[\s\S])*'?)|(`(?:[^`\\]|\\[\s\S])*`?)|(0[xX][\da-fA-F_]+|0[bB][01_]+|(?:\d[\d_]*(?:\.[\d_]*)?|\.\d[\d_]*)(?:[eE][+-]?\d+)?)|([A-Za-z_]\w*)|(\.\.\.?|[+\-*\/%^#=<>~]=?|::|->|[|&?])/g;
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const sp=(c,s)=>`<span class="${c}">${esc(s)}</span>`;
+const prev=(s,i)=>{while(--i>=0&&(s[i]===' '||s[i]==='\t'));return s[i]||''};
+const next=(s,i)=>{while(i<s.length&&(s[i]===' '||s[i]==='\t'))i++;return s[i]||''};
+function hl(src){
+  let o='',last=0,m;RX.lastIndex=0;
+  while((m=RX.exec(src))){
+    o+=esc(src.slice(last,m.index));const t=m[0];last=RX.lastIndex;
+    if(m[1])o+=sp('c',t);
+    else if(m[3])o+=sp('s',t);
+    else if(m[5])o+=t.split(/(\{[^{}]*\})/).map(p=>p&&(p[0]==='{'&&p.length>1?sp('p',p):sp('s',p))).join('');
+    else if(m[6])o+=sp('n',t);
+    else if(m[7]){
+      const pc=prev(src,m.index),nc=next(src,last);let c='';
+      if(KW.has(t))c='k';
+      else if(/\b(function|type)\s+$/.test(src.slice(Math.max(0,m.index-10),m.index)))c=/type\s+$/.test(src.slice(Math.max(0,m.index-10),m.index))?'t':'f';
+      else if(pc==='.')c=nc==='('?'f':'';
+      else if(pc===':')c=nc==='('?'f':'t';
+      else if(GLOB.has(t))c='g';
+      else if(FN.has(t)||nc==='(')c='f';
+      else if(TY.has(t)&&/[:>|,]/.test(pc))c='t';
+      o+=c?sp(c,t):esc(t);
+    }else o+=sp('o',t);
+  }
+  return o+esc(src.slice(last));
+}
+
+/* ---------- appearance ---------- */
+function apply(){
+  const t=THEMES[S.theme]||THEMES.dusk,r=document.documentElement,st=r.style;
+  for(const k of ['bg','text','muted','accent2','kw','str','num','com','fn','glob','type','op'])st.setProperty('--'+k,t[k]);
+  st.setProperty('--accent',S.accent||t.accent);
+  st.setProperty('--panel',t.light?'rgba(255,255,255,.7)':'rgba(255,255,255,.045)');
+  st.setProperty('--panel2',t.light?'rgba(0,0,0,.045)':'rgba(255,255,255,.06)');
+  st.setProperty('--border',t.light?'rgba(0,0,0,.1)':'rgba(255,255,255,.09)');
+  st.colorScheme=t.light?'light':'dark';
+  const f=FONTS[S.font]??'';
+  st.setProperty('--font',(f?f+',':'')+'ui-monospace,SFMono-Regular,Menlo,Consolas,monospace');
+  st.setProperty('--fs',S.fs+'px');st.setProperty('--lh',S.lh);
+  st.setProperty('--tab',S.tab==='tab'?4:S.tab);
+  st.setProperty('--blur',S.blur+'px');st.setProperty('--rad',S.rad+'px');
+  st.setProperty('--maxw',{cozy:'900px',wide:'1200px',full:'calc(100% - 0px)'}[S.w]);
+  r.dataset.fx=S.fx;
+  document.body.classList.toggle('lig',!!S.lig);
+  document.body.classList.toggle('noln',!S.ln);
+  document.body.classList.toggle('nochrome',!S.chrome);
+}
+const save=()=>LS.set('moonbin.s',S);
+
+const ROW=(l,c)=>`<label class="row"><span>${l}</span>${c}</label>`;
+const SEL=(k,o)=>`<select data-k="${k}">${o.map(([v,l])=>`<option value="${v}"${String(S[k])===String(v)?' selected':''}>${l}</option>`).join('')}</select>`;
+const RNG=(k,a,b,s)=>`<input type="range" data-k="${k}" data-n="1" min="${a}" max="${b}" step="${s}" value="${S[k]}"><b>${S[k]}</b>`;
+const CHK=(k)=>`<input type="checkbox" data-k="${k}"${S[k]?' checked':''}>`;
+function buildSettings(){
+  const t=THEMES[S.theme]||THEMES.dusk;
+  $('#set').innerHTML=`<h3>Customize</h3>
+  <div class="sw">${Object.entries(THEMES).map(([k,v])=>`<button data-th="${k}" class="${k===S.theme?'on':''}" style="background:linear-gradient(135deg,${v.bg} 40%,${v.accent})">${v.n}</button>`).join('')}</div>
+  ${ROW('Accent color',`<input type="color" data-k="accent" value="${S.accent||t.accent}">`)}
+  ${ROW('Code font',SEL('font',Object.keys(FONTS).map(k=>[k,k])))}
+  ${ROW('Font size',RNG('fs',11,22,1))}
+  ${ROW('Line height',RNG('lh',1.3,2.2,.05))}
+  ${ROW('Indent',SEL('tab',[['2','2 spaces'],['4','4 spaces'],['8','8 spaces'],['tab','Tab']]))}
+  ${ROW('Background',SEL('fx',[['aurora','Aurora glow'],['grid','Grid'],['plain','Plain']]))}
+  ${ROW('Editor width',SEL('w',[['cozy','Cozy'],['wide','Wide'],['full','Full']]))}
+  ${ROW('Glass blur',RNG('blur',0,40,1))}
+  ${ROW('Corner radius',RNG('rad',0,32,1))}
+  ${ROW('Font ligatures',CHK('lig'))}
+  ${ROW('Line numbers',CHK('ln'))}
+  ${ROW('Window dots',CHK('chrome'))}
+  <button class="btn" id="bReset">Reset to defaults</button>`;
+}
+$('#set').addEventListener('input',e=>{
+  const el=e.target,k=el.dataset.k;if(!k)return;
+  S[k]=el.type==='checkbox'?el.checked:el.dataset.n?+el.value:el.value;
+  if(el.nextElementSibling&&el.nextElementSibling.tagName==='B')el.nextElementSibling.textContent=S[k];
+  apply();save();
+});
+$('#set').addEventListener('click',e=>{
+  const b=e.target.closest('[data-th]');
+  if(b){S.theme=b.dataset.th;S.accent='';apply();save();buildSettings()}
+  if(e.target.id==='bReset'){S={...DEF};apply();save();buildSettings();toast('Settings reset')}
+});
+
+/* ---------- editor ---------- */
+const ed=$('#code'),pre=$('#pre'),gut=$('.gut div'),title=$('#title');
+let lastN=0,curId=null,tmr;
+function sync(){pre.scrollTop=ed.scrollTop;pre.scrollLeft=ed.scrollLeft;gut.style.transform=`translateY(${-ed.scrollTop}px)`}
+function render(){
+  const c=ed.value;pre.innerHTML=hl(c)+'\n';
+  const n=c.split('\n').length;
+  if(n!==lastN){gut.textContent=Array.from({length:n},(_,i)=>i+1).join('\n');lastN=n}
+  $('#stats').textContent=`${n} lines, ${c.length.toLocaleString()} characters, ${new Blob([c]).size.toLocaleString()} bytes`;
+  sync();
+}
+ed.addEventListener('input',()=>{render();clearTimeout(tmr);tmr=setTimeout(()=>{if(!document.body.classList.contains('viewing'))LS.set('moonbin.draft',{t:title.value,c:ed.value})},400)});
+title.addEventListener('input',()=>{document.title=(title.value||'Untitled script')+' · Moonbin'});
+ed.addEventListener('scroll',sync);
+const unit=()=>S.tab==='tab'?'\t':' '.repeat(+S.tab);
+const ins=s=>{if(!document.execCommand('insertText',false,s)){ed.setRangeText(s,ed.selectionStart,ed.selectionEnd,'end');ed.dispatchEvent(new Event('input'))}};
+ed.addEventListener('keydown',e=>{
+  if(ed.readOnly)return;
+  if(e.key==='Tab'&&!e.shiftKey){e.preventDefault();ins(unit())}
+  else if(e.key==='Enter'&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey){
+    const p=ed.selectionStart,ls=ed.value.lastIndexOf('\n',p-1)+1,line=ed.value.slice(ls,p);
+    const ind=line.match(/^[ \t]*/)[0];
+    const more=/(\bthen|\bdo|\belse|\brepeat|[{(])\s*$|\bfunction\b[^\n]*\)\s*(:\s*[\w?]+)?\s*$/.test(line);
+    e.preventDefault();ins('\n'+ind+(more?unit():''));
+  }
+});
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();saveLib()}
+  else if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();share()}
+  else if(e.key==='Escape')closeDrawers();
+});
+
+/* ---------- share links ---------- */
+const b64=u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')};
+const unb64=s=>Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
+async function enc(o){
+  let u=new TextEncoder().encode(JSON.stringify(o)),v='v0.';
+  if(window.CompressionStream){u=new Uint8Array(await new Response(new Blob([u]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer());v='v1.'}
+  return v+b64(u);
+}
+async function dec(h){
+  let u=unb64(h.slice(3));
+  if(h.startsWith('v1.'))u=new Uint8Array(await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer());
+  return JSON.parse(new TextDecoder().decode(u));
+}
+async function copy(t){try{await navigator.clipboard.writeText(t)}catch{const a=document.createElement('textarea');a.value=t;document.body.append(a);a.select();document.execCommand('copy');a.remove()}}
+async function linkFor(t,c){return location.href.split('#')[0]+'#'+await enc({t,c})}
+async function share(t=title.value,c=ed.value){
+  const u=await linkFor(t,c);await copy(u);
+  toast(`Link copied (${u.length.toLocaleString()} characters)`+(u.length>8000?'. It is long, so some apps may cut it off.':''));
+}
+function setView(v){document.body.classList.toggle('viewing',v);ed.readOnly=title.readOnly=v}
+async function route(){
+  if(!/^#v[01]\./.test(location.hash)){return}
+  try{const o=await dec(location.hash.slice(1));title.value=o.t||'';ed.value=o.c||'';curId=null;setView(true);render();title.dispatchEvent(new Event('input'))}
+  catch{toast('Couldn’t read that link. It may be cut off.')}
+}
+addEventListener('hashchange',()=>{if(/^#v[01]\./.test(location.hash))route();else{setView(false)}});
+
+/* ---------- library ---------- */
+const lib=()=>LS.get('moonbin.lib',[]);
+function saveLib(){
+  if(ed.readOnly)return;
+  const L=lib(),now=Date.now(),t=title.value.trim()||'Untitled script';
+  const i=L.findIndex(x=>x.id===curId);
+  if(i>=0)L[i]={...L[i],t,c:ed.value,ts:now};
+  else{curId=now.toString(36);L.unshift({id:curId,t,c:ed.value,ts:now})}
+  LS.set('moonbin.lib',L);toast('Saved to your library');
+}
+function buildLib(){
+  const L=lib();
+  $('#lib').innerHTML=`<h3>Library</h3>`+(L.length?L.map(x=>`<div class="item"><h4>${esc(x.t)}</h4><p>${x.c.split('\n').length} lines, ${new Date(x.ts).toLocaleDateString()}</p><div><button class="btn sm" data-open="${x.id}">Open</button><button class="btn sm" data-link="${x.id}">Copy link</button><button class="btn sm" data-del="${x.id}">Delete</button></div></div>`).join(''):'<p class="empty">Nothing saved yet. Press Save to library to keep a script in this browser.</p>');
+}
+$('#lib').addEventListener('click',async e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const L=lib(),d=b.dataset;
+  if(d.open){const x=L.find(y=>y.id===d.open);if(x){history.replaceState(null,'',location.pathname+location.search);setView(false);title.value=x.t;ed.value=x.c;curId=x.id;render();closeDrawers()}}
+  if(d.link){const x=L.find(y=>y.id===d.link);if(x)share(x.t,x.c)}
+  if(d.del){LS.set('moonbin.lib',L.filter(y=>y.id!==d.del));if(curId===d.del)curId=null;buildLib()}
+});
+
+/* ---------- chrome ---------- */
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2600)}
+function closeDrawers(){document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));$('#scrim').classList.remove('on')}
+function openDrawer(id){closeDrawers();if(id==='#lib')buildLib();$(id).classList.add('open');$('#scrim').classList.add('on')}
+$('#scrim').onclick=closeDrawers;
+$('#bSet').onclick=()=>openDrawer('#set');
+$('#bLib').onclick=()=>openDrawer('#lib');
+$('#bShare').onclick=()=>share();
+$('#bSave').onclick=saveLib;
+$('#bCopy').onclick=async()=>{await copy(ed.value);toast('Code copied')};
+$('#bDl').onclick=()=>{
+  const a=document.createElement('a'),n=(title.value.trim()||'script').replace(/[^\w\- ]+/g,'').replace(/\s+/g,'-').toLowerCase()||'script';
+  a.href=URL.createObjectURL(new Blob([ed.value],{type:'text/plain'}));a.download=n+'.lua';a.click();URL.revokeObjectURL(a.href);
+};
+$('#bFork').onclick=()=>{history.replaceState(null,'',location.pathname+location.search);setView(false);curId=null;if(title.value)title.value+=' (copy)';ed.focus()};
+$('#bNew').onclick=()=>{history.replaceState(null,'',location.pathname+location.search);setView(false);title.value='';ed.value='';curId=null;LS.set('moonbin.draft',null);render();ed.focus()};
+
+/* ---------- start ---------- */
+apply();buildSettings();
+if(/^#v[01]\./.test(location.hash))route();
+else{const d=LS.get('moonbin.draft',null);title.value=d?d.t:'';ed.value=d?d.c:SAMPLE;render()}
+</script>
+</body>
+</html>
